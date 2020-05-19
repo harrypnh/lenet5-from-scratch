@@ -84,7 +84,7 @@ def train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
         ste = time.time()
         cost = 0
         mini_batches = random_mini_batches(train_data[0], train_data[1], batch_size)
-        print("Training: ")
+        print("Training:")
         for i in tqdm(range(len(mini_batches))):
             batch_image, batch_label = mini_batches[i]
             loss = model.Forward_Propagation(batch_image, batch_label, 'train')
@@ -94,8 +94,8 @@ def train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
         error_train, _ = model.Forward_Propagation(train_data[0], train_data[1], 'test')
         error_test, _ = model.Forward_Propagation(test_data[0], test_data[1], 'test')
         error_rate_list.append([error_train / 60000, error_test / 10000])
-        print("0/1 error(s) of training set: ", error_train, "/", len(train_data[1]))
-        print("0/1 error(s) of testing set: ", error_test, "/", len(test_data[1]))
+        print("0/1 error(s) of training set:", error_train, "/", len(train_data[1]))
+        print("0/1 error(s) of testing set:", error_test, "/", len(test_data[1]))
         print("Time used:", time.time() - ste, "sec")
         print("---------- epoch", epoch + 1, "end ------------")
         with open("model_data_" + str(epoch + 1) + ".pkl", "wb") as output:
