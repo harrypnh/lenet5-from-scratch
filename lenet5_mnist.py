@@ -81,7 +81,7 @@ def train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
         print("learning rate: {}".format(learning_rate))
         print("batch size: {}".format(batch_size))
         # loop over each batch
-        ste = time.time()
+        start_time_epoch = time.time()
         cost = 0
         mini_batches = random_mini_batches(train_data[0], train_data[1], batch_size)
         print("Training:")
@@ -96,7 +96,7 @@ def train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
         error_rate_list.append([error_train / 60000, error_test / 10000])
         print("0/1 error(s) of training set:", error_train, "/", len(train_data[1]))
         print("0/1 error(s) of testing set:", error_test, "/", len(test_data[1]))
-        print("Time used:", time.time() - ste, "sec")
+        print("Time used:", time.time() - start_time_epoch, "sec")
         print("---------- epoch", epoch + 1, "end ------------")
         with open("model_data_" + str(epoch + 1) + ".pkl", "wb") as output:
             pickle.dump(model, output, pickle.HIGHEST_PROTOCOL)
