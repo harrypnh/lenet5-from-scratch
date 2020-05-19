@@ -70,6 +70,21 @@ def load_dataset(test_image_path, test_label_path, train_image_path, train_label
     test_image_normalised_pad = normalise(zero_pad(test_image[:, :, :, np.newaxis], 2))
     return (train_image_normalised_pad, train_label), (test_image_normalised_pad, test_label)
 
+def extract_model_data(model, epoch):
+    temp_model = LeNet5()
+    temp_model.C1.weight = model.C1.weight
+    temp_model.C1.bias = model.C1.bias
+    temp_model.C3.weight = model.C3.weight
+    temp_model.C3.bias = model.C3.bias
+    temp_model.C5.weight = model.C5.weight
+    temp_model.C5.bias = model.C5.bias
+    temp_model.F6.weight = model.F6.weight
+    temp_model.F6.bias = model.F6.bias
+    temp_model.F7.weight = model.F7.weight
+    temp_model.F7.bias = model.F7.bias
+    with open("model_data_" + str(epoch + 1) + ".pkl", "wb") as output:
+        pickle.dump(temp_model, output, pickle.HIGHEST_PROTOCOL)
+
 def train(model, train_data, test_data, epoches, learning_rate_list, batch_size):
     # training loops
     start_time = time.time()
@@ -98,8 +113,7 @@ def train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
         print("0/1 error(s) of testing set:", error_test, "/", len(test_data[1]))
         print("Time used:", time.time() - start_time_epoch, "sec")
         print("---------- epoch", epoch + 1, "end ------------")
-        with open("model_data_" + str(epoch + 1) + ".pkl", "wb") as output:
-            pickle.dump(model, output, pickle.HIGHEST_PROTOCOL)
+        extract_model_data(model, epoch)
     error_rate_list = np.array(error_rate_list).T
     print("Total time used:", time.time() - start_time, "sec")
     return error_rate_list
