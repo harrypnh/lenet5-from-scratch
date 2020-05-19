@@ -127,4 +127,5 @@ plt.plot(x, error_rate_list[0])
 plt.plot(x, error_rate_list[1])
 plt.legend(["training data", "testing data"], loc = "upper right")
 plt.show()
-test(model_path = "model_data_20.pkl", test_data)
+model_path = "model_data_20.pkl"
+test(model_path, test_data)
