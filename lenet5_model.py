@@ -161,7 +161,7 @@ class Output_Layer(object):
         self.input_array, self.labels, self.output_array = None, None, None
         return d_input_array
 
-# LeNet5 object
+# LeNet5 Model
 class LeNet5(object):
     def __init__(self):
         kernel_shape = {"C1": (5, 5, 1, 6),
@@ -195,16 +195,16 @@ class LeNet5(object):
         ReLU4_FP = self.ReLU4.forward_propagation(F6_FP)
         return self.F7.forward_propagation(ReLU4_FP, input_label, mode)
 
-    def Back_Propagation(self, lr_global):
-        F7_BP = self.F7.back_propagation(lr_global)
+    def Back_Propagation(self, learning_rate):
+        F7_BP = self.F7.back_propagation(learning_rate)
         ReLU4_BP = self.ReLU4.back_propagation(F7_BP)
-        F6_BP = self.F6.back_propagation(ReLU4_BP, lr_global)
+        F6_BP = self.F6.back_propagation(ReLU4_BP, learning_rate)
         F6_BP = F6_BP[:, np.newaxis, np.newaxis, :]
         ReLU3_BP = self.ReLU3.back_propagation(F6_BP)
-        C5_BP = self.C5.back_propagation(ReLU3_BP, lr_global)
+        C5_BP = self.C5.back_propagation(ReLU3_BP, learning_rate)
         ReLU2_BP = self.ReLU2.back_propagation(C5_BP)
         S4_BP = self.S4.back_propagation(ReLU2_BP)
-        C3_BP = self.C3.back_propagation(S4_BP, lr_global)
+        C3_BP = self.C3.back_propagation(S4_BP, learning_rate)
         ReLU1_BP = self.ReLU1.back_propagation(C3_BP)
         S2_BP = self.S2.back_propagation(ReLU1_BP)
-        self.C1.back_propagation(S2_BP, lr_global)
+        self.C1.back_propagation(S2_BP, learning_rate)
