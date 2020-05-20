@@ -1,6 +1,7 @@
 # LeNet-5 from Scratch
 LeNet-5 Convolution Neural Network built primarily using NumPy and applied on the MNIST Handwritten Digit Dataset.
 ## Training and Testing on MNIST Handwritten Digit Dataset
+- The original size of an image in the MNIST dataset is `28x28`. Before training on LeNet-5, all MNIST images are added a zero-padding of size `2`, after which they all have the size of `32x32`.
 - The training has 20 epoches, and the learning rate decreases after each epoch.
 - The learning rates are set as follows.
   - Epoch 1 and 2: 0.05
