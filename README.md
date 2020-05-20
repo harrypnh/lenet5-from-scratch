@@ -13,7 +13,7 @@ LeNet-5 Convolution Neural Network built primarily using NumPy and applied on th
 
 After each epoch, the settings of the model will be extracted and stored in a .pkl file using `pickle`. The best model achieves the error rate of `0.86%` on the testing dataset.
 
-<img src="/images/figure_batch_size_8.png" width="500"/>
+<img src="/images/figure_batch_size_8.png" width="480"/>
 
 ```
 ---------- epoch 1 begin ----------
