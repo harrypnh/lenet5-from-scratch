@@ -19,11 +19,6 @@ def readDataset(dataset_path):
         image_dataset = np.fromfile(image_file, dtype = np.uint8).reshape(len(label_dataset), rows, columns)
     return (image_dataset, label_dataset)
 
-# padding for the matrix of images
-def zero_pad(X, pad):
-    X_pad = np.pad(X, ((0, ), (pad, ), (pad, ), (0, )), "constant", constant_values = (0, 0))
-    return X_pad
-
 # normalise the dataset
 def normalise(image):
     image -= image.min()
