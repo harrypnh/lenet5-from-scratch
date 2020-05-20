@@ -4,37 +4,40 @@ from cnn_layers import Conv_Layer, ReLU_Layer, MaxPool_Layer, FC_Layer, FC_Outpu
 # CustomCNN Model
 class CustomCNN(object):
     def __init__(self):
-        kernel_shape = {"C1": (1, 1, 1, 8),
-                        "C3": (1, 1, 8, 16),
-                        "C5": (1, 1, 16, 32),
-                        "C7": (1, 1, 32, 64),
-                        "C9": (1, 1, 64, 128),
-                        "C11": (1, 1, 128, 256),
-                        "F12": (256, 512),
-                        "F13": (512, 128),
-                        "F14": (128, 10)}
-        self.C1 = Conv_Layer(kernel_shape["C1"])
+        kernel_shape = {"C1": (3, 3, 1, 8),
+                        "C3": (3, 3, 8, 16),
+                        "C5": (3, 3, 16, 32),
+                        "C7": (3, 3, 32, 64),
+                        "C9": (3, 3, 64, 128),
+                        "F11": (128, 1024),
+                        "F12": (1024, 512),
+                        "F13": (512, 256),
+                        "F14": (256, 128),
+                        "F15": (128, 10)}
+        self.C1 = Conv_Layer(kernel_shape["C1"], pad = 1)
         self.ReLU1 = ReLU_Layer()
         self.S2 = MaxPool_Layer()
-        self.C3 = Conv_Layer(kernel_shape["C3"])
+        self.C3 = Conv_Layer(kernel_shape["C3"], pad = 2)
         self.ReLU2 = ReLU_Layer()
         self.S4 = MaxPool_Layer()
-        self.C5 = Conv_Layer(kernel_shape["C5"])
+        self.C5 = Conv_Layer(kernel_shape["C5"], pad = 1)
         self.ReLU3 = ReLU_Layer()
         self.S6 = MaxPool_Layer()
-        self.C7 = Conv_Layer(kernel_shape["C7"])
+        self.C7 = Conv_Layer(kernel_shape["C7"], pad = 1)
         self.ReLU4 = ReLU_Layer()
         self.S8 = MaxPool_Layer()
-        self.C9 = Conv_Layer(kernel_shape["C9"])
+        self.C9 = Conv_Layer(kernel_shape["C9"], pad = 1)
         self.ReLU5 = ReLU_Layer()
         self.S10 = MaxPool_Layer()
-        self.C11 = Conv_Layer(kernel_shape["C11"])
+        self.F11 = FC_Layer(kernel_shape["F11"])
         self.ReLU6 = ReLU_Layer()
         self.F12 = FC_Layer(kernel_shape["F12"])
         self.ReLU7 = ReLU_Layer()
         self.F13 = FC_Layer(kernel_shape["F13"])
         self.ReLU8 = ReLU_Layer()
-        self.F14 = FC_Output_Layer(kernel_shape["F14"])
+        self.F14 = FC_Layer(kernel_shape["F14"])
+        self.ReLU9 = ReLU_Layer()
+        self.F15 = FC_Output_Layer(kernel_shape["F15"])
 
     def forward_propagation(self, input_image, input_label, mode):
         C1_FP = self.C1.forward_propagation(input_image)
@@ -52,25 +55,29 @@ class CustomCNN(object):
         C9_FP = self.C9.forward_propagation(S8_FP)
         ReLU5_FP = self.ReLU5.forward_propagation(C9_FP)
         S10_FP = self.S10.forward_propagation(ReLU5_FP)
-        C11_FP = self.C11.forward_propagation(S10_FP)
-        ReLU6_FP = self.ReLU6.forward_propagation(C11_FP)
-        ReLU6_FP = ReLU6_FP[:, 0, 0, :]
+        S10_FP = S10_FP[:, 0, 0, :]
+        F11_FP = self.F11.forward_propagation(S10_FP)
+        ReLU6_FP = self.ReLU6.forward_propagation(F11_FP)
         F12_FP = self.F12.forward_propagation(ReLU6_FP)
         ReLU7_FP = self.ReLU7.forward_propagation(F12_FP)
         F13_FP = self.F13.forward_propagation(ReLU7_FP)
         ReLU8_FP = self.ReLU8.forward_propagation(F13_FP)
-        return self.F14.forward_propagation(ReLU8_FP, input_label, mode)
+        F14_FP = self.F14.forward_propagation(ReLU8_FP)
+        ReLU9_FP = self.ReLU9.forward_propagation(F14_FP)
+        return self.F15.forward_propagation(ReLU9_FP, input_label, mode)
 
     def back_propagation(self, learning_rate):
-        F14_BP = self.F14.back_propagation(learning_rate)
+        F15_BP = self.F15.back_propagation(learning_rate)
+        ReLU9_BP = self.ReLU9.back_propagation(F15_BP)
+        F14_BP = self.F14.back_propagation(ReLU9_BP, learning_rate)
         ReLU8_BP = self.ReLU8.back_propagation(F14_BP)
         F13_BP = self.F13.back_propagation(ReLU8_BP, learning_rate)
         ReLU7_BP = self.ReLU7.back_propagation(F13_BP)
         F12_BP = self.F12.back_propagation(ReLU7_BP, learning_rate)
-        F12_BP = F12_BP[:, np.newaxis, np.newaxis, :]
         ReLU6_BP = self.ReLU6.back_propagation(F12_BP)
-        C11_BP = self.C11.back_propagation(ReLU6_BP, learning_rate)
-        S10_BP = self.S10.back_propagation(C11_BP)
+        F11_BP = self.F11.back_propagation(ReLU6_BP, learning_rate)
+        F11_BP = F11_BP[:, np.newaxis, np.newaxis, :]
+        S10_BP = self.S10.back_propagation(F11_BP)
         ReLU5_BP = self.ReLU5.back_propagation(S10_BP)
         C9_BP = self.C9.back_propagation(ReLU5_BP, learning_rate)
         S8_BP = self.S8.back_propagation(C9_BP)
@@ -118,14 +125,14 @@ class CustomCNN(object):
         temp_model.C9.pad = self.C9.pad
         temp_model.S10.stride = self.S10.stride
         temp_model.S10.f = self.S10.f
-        temp_model.C11.weight = self.C11.weight
-        temp_model.C11.bias = self.C11.bias
-        temp_model.C11.stride = self.C11.stride
-        temp_model.C11.pad = self.C11.pad
+        temp_model.F11.weight = self.F11.weight
+        temp_model.F11.bias = self.F11.bias
         temp_model.F12.weight = self.F12.weight
         temp_model.F12.bias = self.F12.bias
         temp_model.F13.weight = self.F13.weight
         temp_model.F13.bias = self.F13.bias
         temp_model.F14.weight = self.F14.weight
         temp_model.F14.bias = self.F14.bias
+        temp_model.F15.weight = self.F15.weight
+        temp_model.F15.bias = self.F15.bias
         return temp_model
