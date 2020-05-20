@@ -108,7 +108,7 @@ def test(model_path, test_data):
     # read model
     with open(model_path, "rb") as model_file:
         model = pickle.load(model_file)
-    print("Testing on {}:".format(model_path))
+    print("Testing with {}:".format(model_path))
     errors, predictions = model.forward_propagation(test_data[0], test_data[1], "test")
     print("error rate:", errors / len(predictions))
 
