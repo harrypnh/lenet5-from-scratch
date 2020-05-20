@@ -218,7 +218,7 @@ Done, total cost of epoch 20: 54.86490839051625
 Time used: 597.2083172798157 sec
 ---------- epoch 20 end ------------
 Total time used: 11879.68366599083 sec
-Testing on model_data_10.pkl:
+Testing with model_data_10.pkl:
 error rate: 0.0086
 ```
 ## References
