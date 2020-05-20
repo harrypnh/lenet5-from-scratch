@@ -66,8 +66,8 @@ def load_dataset(test_image_path, test_label_path, train_image_path, train_label
     train_image, train_label = readDataset(train_dataset)
     test_image, test_label = readDataset(test_dataset)
     # data preprocessing
-    train_image_normalised_pad = normalise(zero_pad(train_image[:, :, :, np.newaxis], 2))
-    test_image_normalised_pad = normalise(zero_pad(test_image[:, :, :, np.newaxis], 2))
+    train_image_normalised_pad = normalise(train_image[:, :, :, np.newaxis])
+    test_image_normalised_pad = normalise(test_image[:, :, :, np.newaxis])
     return (train_image_normalised_pad, train_label), (test_image_normalised_pad, test_label)
 
 def train(model, train_data, test_data, epoches, learning_rate_list, batch_size):
