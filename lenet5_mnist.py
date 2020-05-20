@@ -116,8 +116,8 @@ test_image_path = "dataset/MNIST/t10k-images-idx3-ubyte"
 test_label_path = "dataset/MNIST/t10k-labels-idx1-ubyte"
 train_image_path = "dataset/MNIST/train-images-idx3-ubyte"
 train_label_path = "dataset/MNIST/train-labels-idx1-ubyte"
-batch_size = 256
-epoches = 2
+batch_size = 16
+epoches = 20
 learning_rate_list = np.array([5e-2] * 2 + [2e-2] * 3 + [1e-2] * 3 + [5e-3] * 4 + [1e-3] * 4 + [5e-4] * 4)
 # model_path = "model_data_20.pkl"
 
