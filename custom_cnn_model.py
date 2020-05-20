@@ -11,7 +11,7 @@ class CustomCNN(object):
                         "C9": (1, 1, 64, 128),
                         "C11": (1, 1, 128, 256),
                         "F12": (256, 512),
-                        "F13": (512, 128)
+                        "F13": (512, 128),
                         "F14": (128, 10)}
         self.C1 = Conv_Layer(kernel_shape["C1"])
         self.ReLU1 = ReLU_Layer()
