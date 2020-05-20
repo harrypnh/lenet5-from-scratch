@@ -1,3 +1,4 @@
+import numpy as np
 from cnn_layers import Conv_Layer, ReLU_Layer, MaxPool_Layer, FC_Layer, FC_Output_Layer
 
 # LeNet5 Model
