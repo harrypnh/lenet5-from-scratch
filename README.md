@@ -12,6 +12,9 @@ LeNet-5 Convolution Neural Network built primarily using NumPy and applied on th
 - The batch size is 8 to allow more weigth and bias updates which may quickly reduce the error rate over 20 epoches.<br />
 
 After each epoch, the settings of the model will be extracted and stored in a .pkl file using `pickle`. The best model achieves the error rate of `0.86%` on the testing dataset.
+
+<img src="/images/figure_batch_size_8.png" width="500"/>
+
 ```
 ---------- epoch 1 begin ----------
 learning rate: 0.05
