@@ -1,3 +1,5 @@
+import numpy as np
+
 # padding for the matrix of images
 def zero_pad(X, pad):
     X_pad = np.pad(X, ((0, ), (pad, ), (pad, ), (0, )), "constant", constant_values = (0, 0))
