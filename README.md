@@ -2,6 +2,15 @@
 LeNet-5 Convolution Neural Network built primarily using NumPy and applied on the MNIST Handwritten Digit Dataset.
 ## Training and Testing on MNIST Handwritten Digit Dataset
 - The original size of an image in the MNIST dataset is `28x28`. Before training on LeNet-5, all MNIST images are added a zero-padding of size `2`, after which they all have the size of `32x32`.
+- The LeNet-5 has the following structure:<br/>
+`C1 -> ReLU1 -> S2 -> C3 -> ReLU2 -> S4 -> C5 -> ReLU3 -> F6 -> ReLU4 -> F7 (softmax)`
+  - C1 is a convolutional layer having 6 `5x5x1` filters and no zero-padding.
+  - S2 is a max-pooling layer of size `2x2` and stride `2`.
+  - C3 is a convolutional layer having 16 `5x5x6` filters and no zero-padding.
+  - S4 is a max-pooling layer of size `2x2` and stride `2`.
+  - C5 is a convolutional layer having 120 `5x5x16` filters and no zero-padding.
+  - F6 is a fully-connected layer having `84` neurons, each of which takes `120` feature inputs.
+  - F7 is a fully-connected layer having `10` neurons, each of which takes `84` feature inputs. Each input image of LeNet-5 has an output vector of size `10` from applying softmax activation function on `10` neuron outputs of layer F7. This vector corresponds to 10 classes for digit 0 to 9.
 - The training has 20 epoches, and the learning rate decreases after each epoch.
 - The learning rates are set as follows.
   - Epoch 1 and 2: 0.05
@@ -10,7 +19,7 @@ LeNet-5 Convolution Neural Network built primarily using NumPy and applied on th
   - Epoch 9, 10, 11 and 12: 0.005
   - Epoch 13, 14, 15 and 16: 0.001
   - Epoch 17, 18, 19 and 20: 0.0005
-- The batch size is 8 to allow more weigth and bias updates which may quickly reduce the error rate over 20 epoches.<br />
+- The batch size is 8 to allow more weigth and bias updates which may quickly reduce the error rate over 20 epoches.<br/>
 
 After each epoch, the settings of the model will be extracted and stored in a .pkl file using `pickle`. The best model achieves the error rate of `0.86%` on the testing dataset. The training was conducted using CPU only, and the model is evaluated on training and testing datasets once after finishing each epoch, so the total running is around 3 hours.
 
