@@ -4,16 +4,16 @@ from cnn_layers import Conv_Layer, ReLU_Layer, MaxPool_Layer, FC_Layer, FC_Outpu
 # CustomCNN Model
 class CustomCNN(object):
     def __init__(self):
-        kernel_shape = {"C1": (3, 3, 1, 8),
-                        "C3": (3, 3, 8, 16),
-                        "C5": (3, 3, 16, 32),
-                        "C7": (3, 3, 32, 64),
-                        "C9": (3, 3, 64, 128),
-                        "F11": (128, 1024),
-                        "F12": (1024, 512),
-                        "F13": (512, 256),
-                        "F14": (256, 128),
-                        "F15": (128, 10)}
+        kernel_shape = {"C1": (3, 3, 1, 16),
+                        "C3": (3, 3, 16, 32),
+                        "C5": (3, 3, 32, 64),
+                        "C7": (3, 3, 64, 128),
+                        "C9": (3, 3, 128, 256),
+                        "F11": (256, 512),
+                        "F12": (512, 256),
+                        "F13": (256, 64),
+                        "F14": (64, 32),
+                        "F15": (32, 10)}
         self.C1 = Conv_Layer(kernel_shape["C1"], pad = 1)
         self.ReLU1 = ReLU_Layer()
         self.S2 = MaxPool_Layer()
