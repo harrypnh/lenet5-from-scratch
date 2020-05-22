@@ -4,40 +4,22 @@ from cnn_layers import Conv_Layer, ReLU_Layer, MaxPool_Layer, FC_Layer, FC_Outpu
 # CustomCNN Model
 class CustomCNN(object):
     def __init__(self):
-        kernel_shape = {"C1": (3, 3, 1, 16),
-                        "C3": (3, 3, 16, 32),
-                        "C5": (3, 3, 32, 64),
-                        "C7": (3, 3, 64, 128),
-                        "C9": (3, 3, 128, 256),
-                        "F11": (256, 512),
-                        "F12": (512, 256),
-                        "F13": (256, 64),
-                        "F14": (64, 32),
-                        "F15": (32, 10)}
-        self.C1 = Conv_Layer(kernel_shape["C1"], pad = 1)
+        kernel_shape = {"C1": (5, 5, 1, 32),
+                        "C3": (5, 5, 32, 64),
+                        "C5": (5, 5, 64, 128),
+                        "F6": (128, 256),
+                        "F7": (256, 10)}
+        self.C1 = Conv_Layer(kernel_shape["C1"], pad = 2)
         self.ReLU1 = ReLU_Layer()
         self.S2 = MaxPool_Layer()
-        self.C3 = Conv_Layer(kernel_shape["C3"], pad = 2)
+        self.C3 = Conv_Layer(kernel_shape["C3"])
         self.ReLU2 = ReLU_Layer()
         self.S4 = MaxPool_Layer()
-        self.C5 = Conv_Layer(kernel_shape["C5"], pad = 1)
+        self.C5 = Conv_Layer(kernel_shape["C5"])
         self.ReLU3 = ReLU_Layer()
-        self.S6 = MaxPool_Layer()
-        self.C7 = Conv_Layer(kernel_shape["C7"], pad = 1)
+        self.F6 = FC_Layer(kernel_shape["F6"])
         self.ReLU4 = ReLU_Layer()
-        self.S8 = MaxPool_Layer()
-        self.C9 = Conv_Layer(kernel_shape["C9"], pad = 1)
-        self.ReLU5 = ReLU_Layer()
-        self.S10 = MaxPool_Layer()
-        self.F11 = FC_Layer(kernel_shape["F11"])
-        self.ReLU6 = ReLU_Layer()
-        self.F12 = FC_Layer(kernel_shape["F12"])
-        self.ReLU7 = ReLU_Layer()
-        self.F13 = FC_Layer(kernel_shape["F13"])
-        self.ReLU8 = ReLU_Layer()
-        self.F14 = FC_Layer(kernel_shape["F14"])
-        self.ReLU9 = ReLU_Layer()
-        self.F15 = FC_Output_Layer(kernel_shape["F15"])
+        self.F7 = FC_Output_Layer(kernel_shape["F7"])
 
     def forward_propagation(self, input_image, input_label, mode):
         C1_FP = self.C1.forward_propagation(input_image)
@@ -48,43 +30,17 @@ class CustomCNN(object):
         S4_FP = self.S4.forward_propagation(ReLU2_FP)
         C5_FP = self.C5.forward_propagation(S4_FP)
         ReLU3_FP = self.ReLU3.forward_propagation(C5_FP)
-        S6_FP = self.S6.forward_propagation(ReLU3_FP)
-        C7_FP = self.C7.forward_propagation(S6_FP)
-        ReLU4_FP = self.ReLU4.forward_propagation(C7_FP)
-        S8_FP = self.S8.forward_propagation(ReLU4_FP)
-        C9_FP = self.C9.forward_propagation(S8_FP)
-        ReLU5_FP = self.ReLU5.forward_propagation(C9_FP)
-        S10_FP = self.S10.forward_propagation(ReLU5_FP)
-        S10_FP = S10_FP[:, 0, 0, :]
-        F11_FP = self.F11.forward_propagation(S10_FP)
-        ReLU6_FP = self.ReLU6.forward_propagation(F11_FP)
-        F12_FP = self.F12.forward_propagation(ReLU6_FP)
-        ReLU7_FP = self.ReLU7.forward_propagation(F12_FP)
-        F13_FP = self.F13.forward_propagation(ReLU7_FP)
-        ReLU8_FP = self.ReLU8.forward_propagation(F13_FP)
-        F14_FP = self.F14.forward_propagation(ReLU8_FP)
-        ReLU9_FP = self.ReLU9.forward_propagation(F14_FP)
-        return self.F15.forward_propagation(ReLU9_FP, input_label, mode)
+        ReLU3_FP = ReLU3_FP[:, 0, 0, :]
+        F6_FP = self.F6.forward_propagation(ReLU3_FP)
+        ReLU4_FP = self.ReLU4.forward_propagation(F6_FP)
+        return self.F7.forward_propagation(ReLU4_FP, input_label, mode)
 
     def back_propagation(self, learning_rate):
-        F15_BP = self.F15.back_propagation(learning_rate)
-        ReLU9_BP = self.ReLU9.back_propagation(F15_BP)
-        F14_BP = self.F14.back_propagation(ReLU9_BP, learning_rate)
-        ReLU8_BP = self.ReLU8.back_propagation(F14_BP)
-        F13_BP = self.F13.back_propagation(ReLU8_BP, learning_rate)
-        ReLU7_BP = self.ReLU7.back_propagation(F13_BP)
-        F12_BP = self.F12.back_propagation(ReLU7_BP, learning_rate)
-        ReLU6_BP = self.ReLU6.back_propagation(F12_BP)
-        F11_BP = self.F11.back_propagation(ReLU6_BP, learning_rate)
-        F11_BP = F11_BP[:, np.newaxis, np.newaxis, :]
-        S10_BP = self.S10.back_propagation(F11_BP)
-        ReLU5_BP = self.ReLU5.back_propagation(S10_BP)
-        C9_BP = self.C9.back_propagation(ReLU5_BP, learning_rate)
-        S8_BP = self.S8.back_propagation(C9_BP)
-        ReLU4_BP = self.ReLU4.back_propagation(S8_BP)
-        C7_BP = self.C7.back_propagation(ReLU4_BP, learning_rate)
-        S6_BP = self.S6.back_propagation(C7_BP)
-        ReLU3_BP = self.ReLU3.back_propagation(S6_BP)
+        F7_BP = self.F7.back_propagation(learning_rate)
+        ReLU4_BP = self.ReLU4.back_propagation(F7_BP)
+        F6_BP = self.F6.back_propagation(ReLU4_BP, learning_rate)
+        F6_BP = F6_BP[:, np.newaxis, np.newaxis, :]
+        ReLU3_BP = self.ReLU3.back_propagation(F6_BP)
         C5_BP = self.C5.back_propagation(ReLU3_BP, learning_rate)
         S4_BP = self.S4.back_propagation(C5_BP)
         ReLU2_BP = self.ReLU2.back_propagation(S4_BP)
@@ -111,28 +67,8 @@ class CustomCNN(object):
         temp_model.C5.bias = self.C5.bias
         temp_model.C5.stride = self.C5.stride
         temp_model.C5.pad = self.C5.pad
-        temp_model.S6.stride = self.S6.stride
-        temp_model.S6.f = self.S6.f
-        temp_model.C7.weight = self.C7.weight
-        temp_model.C7.bias = self.C7.bias
-        temp_model.C7.stride = self.C7.stride
-        temp_model.C7.pad = self.C7.pad
-        temp_model.S8.stride = self.S8.stride
-        temp_model.S8.f = self.S8.f
-        temp_model.C9.weight = self.C9.weight
-        temp_model.C9.bias = self.C9.bias
-        temp_model.C9.stride = self.C9.stride
-        temp_model.C9.pad = self.C9.pad
-        temp_model.S10.stride = self.S10.stride
-        temp_model.S10.f = self.S10.f
-        temp_model.F11.weight = self.F11.weight
-        temp_model.F11.bias = self.F11.bias
-        temp_model.F12.weight = self.F12.weight
-        temp_model.F12.bias = self.F12.bias
-        temp_model.F13.weight = self.F13.weight
-        temp_model.F13.bias = self.F13.bias
-        temp_model.F14.weight = self.F14.weight
-        temp_model.F14.bias = self.F14.bias
-        temp_model.F15.weight = self.F15.weight
-        temp_model.F15.bias = self.F15.bias
+        temp_model.F6.weight = self.F6.weight
+        temp_model.F6.bias = self.F6.bias
+        temp_model.F7.weight = self.F7.weight
+        temp_model.F7.bias = self.F7.bias
         return temp_model
