@@ -20,7 +20,7 @@ decision-tree-from-scratch/
 │
 ├── model_data/
 │   ├── lenet5_data_0.86.pkl        # LeNet-5 Model with 0.86% Testing Error Rate
-│   └── customCNN_data_0.62.pkl     # CustomCNN Model with 0.62% Testing Error Rate
+│   └── customCNN_data_0.XX.pkl     # CustomCNN Model with 0.XX% Testing Error Rate
 │
 ├── lenet5_mnist.py                 # Train and Test LeNet-5 on MNIST Dataset
 └── custom_cnn_mnist.py             # Train and Test CustomCNN on MNIST Dataset
