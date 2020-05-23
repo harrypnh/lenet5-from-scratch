@@ -1,5 +1,6 @@
 # LeNet-5 from Scratch
 LeNet-5 Convolution Neural Network built primarily using NumPy and applied on the MNIST Handwritten Digit Dataset.
+
 ## 1. Project Structure
 ```
 decision-tree-from-scratch/
@@ -24,6 +25,7 @@ decision-tree-from-scratch/
 ├── lenet5_mnist.py                 # Train and Test LeNet-5 on MNIST Dataset
 └── custom_cnn_mnist.py             # Train and Test CustomCNN on MNIST Dataset
 ```
+
 ## 2. The Structure of LeNet-5
 <img src="/images/lenet5_structure.png"/>
 
@@ -37,6 +39,7 @@ The LeNet-5 has the following structure:<br/>
 - F6 is a fully-connected layer having `84` neurons, each of which takes `120` feature inputs.
 - F7 is a fully-connected layer having `10` neurons, each of which takes `84` feature inputs. The softmax activation function is applied on the output vector of size `10` from the `10` neurons. This softmax vector corresponds to `10` classes for digit `0` to `9`.
 - The cost function of this model is cross-entropy.
+
 ## 3. LeNet-5 on MNIST Handwritten Digit Dataset
 - The original size of an image in the MNIST dataset is `28x28`. Before training on LeNet-5, all MNIST images are added a zero-padding of size `2`, after which they all have the size of `32x32`.
 - The training has `20` epoches, and the learning rate decreases after each epoch.
@@ -51,6 +54,7 @@ The LeNet-5 has the following structure:<br/>
 
 After each epoch, the settings of the model will be extracted and stored in a `pkl` file using `pickle`. The best model achieves the error rate of `0.86%` on the testing dataset. The training was conducted using CPU only, and the model is evaluated on training and testing datasets once after finishing each epoch, so the total running time is around 3 hours.
 <img src="/images/figure_lenet5.png" width="480"/>
+
 ## 4. The Structure of CustomCNN
 
 ## 5. CustomCNN on MNIST Handwritten Digit Dataset
