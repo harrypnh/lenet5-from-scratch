@@ -3,7 +3,7 @@ import pickle
 import matplotlib.pyplot as plt
 import time
 
-from custom_cnn_model import CustomCNN
+from utils.custom_cnn_model import CustomCNN
 from tqdm import tqdm
 import struct
 import math
@@ -93,7 +93,7 @@ def train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
         print("0/1 error(s) of training set:", error_train, "/", len(train_data[1]))
         print("0/1 error(s) of testing set:", error_test, "/", len(test_data[1]))
         print("---------- epoch", epoch + 1, "end ------------")
-        with open("customCNN_data_" + str(epoch + 1) + ".pkl", "wb") as output:
+        with open("model_data/customCNN_data_" + str(epoch + 1) + ".pkl", "wb") as output:
             pickle.dump(model.extract_model(), output, pickle.HIGHEST_PROTOCOL)
     error_rate_list = np.array(error_rate_list).T
     print("Total time used:", time.time() - start_time, "sec")
@@ -114,13 +114,13 @@ train_label_path = "dataset/MNIST/train-labels-idx1-ubyte"
 batch_size = 16
 epoches = 20
 learning_rate_list = np.array([5e-2] * 2 + [2e-2] * 3 + [1e-2] * 3 + [5e-3] * 4 + [1e-3] * 4 + [5e-4] * 4)
-# model_path = "customCNN_data_20.pkl"
+# model_path = "model_data/customCNN_data_20.pkl"
 
 train_data, test_data = load_dataset(test_image_path, test_label_path, train_image_path, train_label_path)
 model = CustomCNN()
 error_rate_list = train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
 # test(model_path, test_data)
-test("customCNN_data_" + str(error_rate_list[1].argmin() + 1) + ".pkl", test_data)
+test("model_data/customCNN_data_" + str(error_rate_list[1].argmin() + 1) + ".pkl", test_data)
 x = np.arange(1, epoches + 1)
 plt.xlabel("epoches")
 plt.ylabel("error rate")

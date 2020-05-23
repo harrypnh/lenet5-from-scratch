@@ -227,7 +227,7 @@ Done, total cost of epoch 20: 54.86490839051625
 Time used: 597.2083172798157 sec
 ---------- epoch 20 end ------------
 Total time used: 11879.68366599083 sec
-Testing with lenet5_data_10.pkl:
+Testing with model_data/lenet5_data_10.pkl:
 error rate: 0.0086
 ```
 ## CustomCNN on the MNIST Handwritten Digit Dataset
@@ -433,7 +433,7 @@ Time used: 997.0255508422852 sec
 0/1 error(s) of testing set: 71 / 10000
 ---------- epoch 20 end ------------
 Total time used: 37806.881603717804 sec
-Testing with customCNN_data_6.pkl:
+Testing with model_data/customCNN_data_6.pkl:
 error rate: 0.0062
 ```
 ## References
