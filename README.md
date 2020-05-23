@@ -10,7 +10,7 @@ LeNet-5 Convolution Neural Network built primarily using NumPy and applied on th
   - S4 is a max-pooling layer of size `2x2` and stride `2`.
   - C5 is a convolutional layer having 120 `5x5x16` filters and no zero-padding.
   - F6 is a fully-connected layer having `84` neurons, each of which takes `120` feature inputs.
-  - F7 is a fully-connected layer having `10` neurons, each of which takes `84` feature inputs. Each input image of LeNet-5 has an output vector of size `10` from applying softmax activation function on `10` neuron outputs of layer F7. This vector corresponds to 10 classes for digit 0 to 9.
+  - F7 is a fully-connected layer having `10` neurons, each of which takes `84` feature inputs. Each input image of LeNet-5 has an output vector of size `10` from applying softmax activation function on `10` neuron outputs of layer F7. This vector corresponds to `10` classes for digit `0` to `9`.
 - The training has `20` epoches, and the learning rate decreases after each epoch.
 - The learning rates are set as follows.
   - Epoch 1 and 2: `0.05`
