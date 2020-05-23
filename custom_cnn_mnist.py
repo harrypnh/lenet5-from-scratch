@@ -111,10 +111,10 @@ test_image_path = "dataset/MNIST/t10k-images-idx3-ubyte"
 test_label_path = "dataset/MNIST/t10k-labels-idx1-ubyte"
 train_image_path = "dataset/MNIST/train-images-idx3-ubyte"
 train_label_path = "dataset/MNIST/train-labels-idx1-ubyte"
-batch_size = 16
+batch_size = 8
 epoches = 20
 learning_rate_list = np.array([5e-2] * 2 + [2e-2] * 3 + [1e-2] * 3 + [5e-3] * 4 + [1e-3] * 4 + [5e-4] * 4)
-# model_path = "model_data/customCNN_data_20.pkl"
+# model_path = "model_data/customCNN_data_0.62.pkl"
 
 train_data, test_data = load_dataset(test_image_path, test_label_path, train_image_path, train_label_path)
 model = CustomCNN()

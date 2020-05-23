@@ -8,8 +8,7 @@ def zero_pad(X, pad):
 # initialisation of the weights & bias
 def initialise(kernel_shape, sigma = 0.1, bias_factor = 0.01):
     bias_shape = (1, 1, 1, kernel_shape[-1]) if len(kernel_shape) == 4 else (kernel_shape[-1], )
-    mu, sigma = 0, 0.1
-    weight = np.random.normal(mu, sigma, kernel_shape)
+    weight = np.random.normal(0, sigma, kernel_shape)
     bias = np.ones(bias_shape) * bias_factor
     return weight, bias
 
