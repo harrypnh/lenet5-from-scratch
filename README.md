@@ -60,7 +60,7 @@ After each epoch, the settings of the model will be extracted and stored in a `p
 ## 5. CustomCNN on MNIST Handwritten Digit Dataset
 
 ## 6. References
-1. [Matt Wang's repository](https://github.com/mattwang44/LeNet-from-Scratch)
+1. [W.-H. Wang, LeNet5 Implementation FROM SCRATCH](https://github.com/mattwang44/LeNet-from-Scratch)
 2. [P. Dahal, Classification and Loss Evaluation - Softmax and Cross Entropy Loss](https://deepnotes.io/softmax-crossentropy)
 3. [Y. LeCun et al., The MNIST database of handwritten digits](http://yann.lecun.com/exdb/mnist/)
 4. [Y. LeCun et al., Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-98.pdf)
