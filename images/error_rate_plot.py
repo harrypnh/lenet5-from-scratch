@@ -31,7 +31,7 @@ plt.legend(["training data",
             "testing data"], loc = "upper right")
 plt.xticks(range(1, 20 + 1))
 plt.title("LeNet-5 Error Rate during Training (batch size = 8)")
-plt.savefig("images/figure_lenet5.png")
+plt.savefig("figure_lenet5.png")
 
 
 
