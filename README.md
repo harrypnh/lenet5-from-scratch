@@ -1,5 +1,34 @@
 # LeNet-5 from Scratch
 LeNet-5 Convolution Neural Network built primarily using NumPy and applied on the MNIST Handwritten Digit Dataset.
+## 1. Repository Structure
+```
+decision-tree-from-scratch/
+├── dataset/
+│   ├── MNIST/
+│   │   ├── train-images-idx3-ubyte # MNIST Training Images
+│   │   ├── train-labels-idx1-ubyte # MNIST Training Labels
+│   │   ├── t10k-images-idx3-ubyte  # MNIST Testing Images
+│   │   └── t10k-labels-idx1-ubyte  # MNIST Testing Labels
+│   │
+│   └── download.py                 # Download MNIST Dataset
+│
+├── utils/
+│   ├── cnn_layers.py               # All Layers of a CNN
+│   ├── lenet5_model.py             # LeNet-5 Model
+│   └── custom_cnn_model.py         # CustomCNN Model
+│
+├── model_data/
+│   ├── lenet5_data_0.86.pkl        # LeNet-5 Model with 0.86% testing error rate
+│   └── customCNN_data_0.62.pkl     # CustomCNN Model with 0.62% testing error rate
+│
+├── images/
+│   ├── figure_lenet5.png
+│   └── figure_custom_cnn.png
+│
+├── lenet5_mnist.py                 # Train and Test LeNet-5 on MNIST Dataset
+├── custom_cnn_mnist.py             # Train and Test CustomCNN on MNIST Dataset
+└── error_rate_plot.py
+```
 ## Training and Testing on MNIST Handwritten Digit Dataset
 - The original size of an image in the MNIST dataset is `28x28`. Before training on LeNet-5, all MNIST images are added a zero-padding of size `2`, after which they all have the size of `32x32`.
 - The LeNet-5 has the following structure:<br/>
