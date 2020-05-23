@@ -21,13 +21,8 @@ decision-tree-from-scratch/
 │   ├── lenet5_data_0.86.pkl        # LeNet-5 Model with 0.86% Testing Error Rate
 │   └── customCNN_data_0.62.pkl     # CustomCNN Model with 0.62% Testing Error Rate
 │
-├── images/
-│   ├── figure_lenet5.png
-│   └── figure_custom_cnn.png
-│
 ├── lenet5_mnist.py                 # Train and Test LeNet-5 on MNIST Dataset
-├── custom_cnn_mnist.py             # Train and Test CustomCNN on MNIST Dataset
-└── error_rate_plot.py
+└── custom_cnn_mnist.py             # Train and Test CustomCNN on MNIST Dataset
 ```
 ## 2. The Structure of LeNet-5
 <img src="/images/lenet5_structure.png"/>
