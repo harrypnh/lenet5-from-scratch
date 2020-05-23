@@ -18,8 +18,8 @@ decision-tree-from-scratch/
 │   └── custom_cnn_model.py         # CustomCNN Model
 │
 ├── model_data/
-│   ├── lenet5_data_0.86.pkl        # LeNet-5 Model with 0.86% testing error rate
-│   └── customCNN_data_0.62.pkl     # CustomCNN Model with 0.62% testing error rate
+│   ├── lenet5_data_0.86.pkl        # LeNet-5 Model with 0.86% Testing Error Rate
+│   └── customCNN_data_0.62.pkl     # CustomCNN Model with 0.62% Testing Error Rate
 │
 ├── images/
 │   ├── figure_lenet5.png
