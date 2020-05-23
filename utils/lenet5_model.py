@@ -9,17 +9,17 @@ class LeNet5(object):
                         "C5": (5, 5, 16, 120),
                         "F6": (120, 84),
                         "F7": (84, 10)}
-        self.C1 = Conv_Layer(kernel_shape["C1"])
+        self.C1 = Conv_Layer(kernel_shape["C1"], sigma = 0.1, bias_factor = 0.01)
         self.ReLU1 = ReLU_Layer()
         self.S2 = MaxPool_Layer()
-        self.C3 = Conv_Layer(kernel_shape["C3"])
+        self.C3 = Conv_Layer(kernel_shape["C3"], sigma = 0.1, bias_factor = 0.01)
         self.ReLU2 = ReLU_Layer()
         self.S4 = MaxPool_Layer()
-        self.C5 = Conv_Layer(kernel_shape["C5"])
+        self.C5 = Conv_Layer(kernel_shape["C5"], sigma = 0.1, bias_factor = 0.01)
         self.ReLU3 = ReLU_Layer()
-        self.F6 = FC_Layer(kernel_shape["F6"])
+        self.F6 = FC_Layer(kernel_shape["F6"], sigma = 0.1, bias_factor = 0.01)
         self.ReLU4 = ReLU_Layer()
-        self.F7 = FC_Output_Layer(kernel_shape["F7"])
+        self.F7 = FC_Output_Layer(kernel_shape["F7"], sigma = 0.1, bias_factor = 0.01)
 
     def forward_propagation(self, input_image, input_label, mode):
         C1_FP = self.C1.forward_propagation(input_image)

@@ -6,11 +6,11 @@ def zero_pad(X, pad):
     return X_pad
 
 # initialisation of the weights & bias
-def initialise(kernel_shape):
+def initialise(kernel_shape, sigma = 0.1, bias_factor = 0.01):
     bias_shape = (1, 1, 1, kernel_shape[-1]) if len(kernel_shape) == 4 else (kernel_shape[-1], )
-    mu, sigma = 0, 0.01
+    mu, sigma = 0, 0.1
     weight = np.random.normal(mu, sigma, kernel_shape)
-    bias = np.ones(bias_shape) * 0.001
+    bias = np.ones(bias_shape) * bias_factor
     return weight, bias
 
 # softmax activation function for the output layer
@@ -20,8 +20,8 @@ def softmax(X):
 
 # Convolution Layer
 class Conv_Layer(object):
-    def __init__(self, kernel_shape, stride = 1, pad = 0):
-        self.weight, self.bias = initialise(kernel_shape)
+    def __init__(self, kernel_shape, stride = 1, pad = 0, sigma = 0.1, bias_factor = 0.01):
+        self.weight, self.bias = initialise(kernel_shape, sigma, bias_factor)
         self.stride = stride
         self.pad = pad
     
@@ -115,8 +115,8 @@ class MaxPool_Layer(object):
 
 # Fully Connected Layer
 class FC_Layer(object):
-    def __init__(self, weight_shape):
-        self.weight, self.bias = initialise(weight_shape)
+    def __init__(self, weight_shape, sigma = 0.1, bias_factor = 0.01):
+        self.weight, self.bias = initialise(weight_shape, sigma, bias_factor)
 
     def forward_propagation(self, input_array):
         self.input_array = input_array
@@ -133,8 +133,8 @@ class FC_Layer(object):
 
 # Fully Connected Output Layer
 class FC_Output_Layer(object):
-    def __init__(self, weight_shape):
-        self.weight, self.bias = initialise(weight_shape)
+    def __init__(self, weight_shape, sigma = 0.1, bias_factor = 0.01):
+        self.weight, self.bias = initialise(weight_shape, sigma, bias_factor)
     
     def forward_propagation(self, input_array, labels, mode):
         self.input_array = input_array

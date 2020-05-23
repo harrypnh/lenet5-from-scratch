@@ -27,10 +27,11 @@ plt.xlabel("epoches")
 plt.ylabel("error rate")
 plt.plot(epoches, err_train_8)
 plt.plot(epoches, err_test_8)
-plt.legend(["training data (batch size = 8)",
-            "testing data (batch size = 8)"], loc = "upper right")
+plt.legend(["training data",
+            "testing data"], loc = "upper right")
 plt.xticks(range(1, 20 + 1))
-plt.savefig("images/figure_batch_size_8.png")
+plt.title("LeNet-5 Error Rate during Training (batch size = 8)")
+plt.savefig("images/figure_lenet5.png")
 
 
 
