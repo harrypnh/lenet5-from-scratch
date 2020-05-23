@@ -54,7 +54,7 @@ The LeNet-5 has the following structure:<br/>
   - Epoch 17, 18, 19 and 20: `0.0005`
 - The batch size is `8` to allow more weigth and bias updates which may quickly reduce the error rate over `20` epoches.<br/>
 
-After each epoch, the settings of the model will be extracted and stored in a .pkl file using `pickle`. The best model achieves the error rate of `0.86%` on the testing dataset. The training was conducted using CPU only, and the model is evaluated on training and testing datasets once after finishing each epoch, so the total running time is around 3 hours.
+After each epoch, the settings of the model will be extracted and stored in a `pkl` file using `pickle`. The best model achieves the error rate of `0.86%` on the testing dataset. The training was conducted using CPU only, and the model is evaluated on training and testing datasets once after finishing each epoch, so the total running time is around 3 hours.
 <img src="/images/figure_lenet5.png" width="480"/>
 
 ## CustomCNN on the MNIST Handwritten Digit Dataset
