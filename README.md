@@ -30,19 +30,18 @@ decision-tree-from-scratch/
 └── error_rate_plot.py
 ```
 ## 2. The Structure of LeNet-5
-
 <img src="/images/lenet5_structure.png"/>
 
-- The LeNet-5 has the following structure:<br/>
+The LeNet-5 has the following structure:<br/>
 `C1 -> ReLU1 -> S2 -> C3 -> ReLU2 -> S4 -> C5 -> ReLU3 -> F6 -> ReLU4 -> F7 (softmax)`
-  - C1 is a convolutional layer having 6 `5x5x1` filters and no zero-padding. Input: `32x32x1`, Output: `28x28x6`.
-  - S2 is a max-pooling layer of size `2x2` and stride `2`. Input: `28x28x6`, Output: `14x14x6`.
-  - C3 is a convolutional layer having 16 `5x5x6` filters and no zero-padding. Input: `14x14x6`, Output: `10x10x16`.
-  - S4 is a max-pooling layer of size `2x2` and stride `2`. Input: `10x10x16`, Output: `5x5x16`.
-  - C5 is a convolutional layer having 120 `5x5x16` filters and no zero-padding. Input: `5x5x16`, Output: `1x1x120`.
-  - F6 is a fully-connected layer having `84` neurons, each of which takes `120` feature inputs.
-  - F7 is a fully-connected layer having `10` neurons, each of which takes `84` feature inputs. The softmax activation function is applied on the output vector of size `10` from the `10` neurons. This softmax vector corresponds to `10` classes for digit `0` to `9`.
-  - The cost function of this model is cross-entropy.
+- C1 is a convolutional layer having 6 `5x5x1` filters and no zero-padding. Input: `32x32x1`, Output: `28x28x6`.
+- S2 is a max-pooling layer of size `2x2` and stride `2`. Input: `28x28x6`, Output: `14x14x6`.
+- C3 is a convolutional layer having 16 `5x5x6` filters and no zero-padding. Input: `14x14x6`, Output: `10x10x16`.
+- S4 is a max-pooling layer of size `2x2` and stride `2`. Input: `10x10x16`, Output: `5x5x16`.
+- C5 is a convolutional layer having 120 `5x5x16` filters and no zero-padding. Input: `5x5x16`, Output: `1x1x120`.
+- F6 is a fully-connected layer having `84` neurons, each of which takes `120` feature inputs.
+- F7 is a fully-connected layer having `10` neurons, each of which takes `84` feature inputs. The softmax activation function is applied on the output vector of size `10` from the `10` neurons. This softmax vector corresponds to `10` classes for digit `0` to `9`.
+- The cost function of this model is cross-entropy.
 ## 3. Training and Testing on MNIST Handwritten Digit Dataset
 - The original size of an image in the MNIST dataset is `28x28`. Before training on LeNet-5, all MNIST images are added a zero-padding of size `2`, after which they all have the size of `32x32`.
 - The training has `20` epoches, and the learning rate decreases after each epoch.
