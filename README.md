@@ -270,3 +270,5 @@ Time used: 611.6129689216614 sec
 Testing with model_data/lenet5_data_9.pkl:
 error rate: 0.0078
 ```
+
+## Appendix 2. CustomCNN Training Details
