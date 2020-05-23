@@ -87,17 +87,14 @@ def train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
             model.back_propagation(learning_rate)
         print("Done, total cost of epoch {}: {}".format(epoch + 1, cost))
         print("Time used:", time.time() - start_time_epoch, "sec")
-        with open("model_data_" + str(epoch + 1) + ".pkl", "wb") as output:
-            pickle.dump(model, output, pickle.HIGHEST_PROTOCOL)
         error_train, _ = model.forward_propagation(train_data[0], train_data[1], 'test')
         error_test, _ = model.forward_propagation(test_data[0], test_data[1], 'test')
         error_rate_list.append([error_train / 60000, error_test / 10000])
         print("0/1 error(s) of training set:", error_train, "/", len(train_data[1]))
         print("0/1 error(s) of testing set:", error_test, "/", len(test_data[1]))
-        # print("Time used:", time.time() - start_time_epoch, "sec")
         print("---------- epoch", epoch + 1, "end ------------")
-        # with open("model_data_" + str(epoch + 1) + ".pkl", "wb") as output:
-        #     pickle.dump(model.extract_model(), output, pickle.HIGHEST_PROTOCOL)
+        with open("customCNN_data_" + str(epoch + 1) + ".pkl", "wb") as output:
+            pickle.dump(model.extract_model(), output, pickle.HIGHEST_PROTOCOL)
     error_rate_list = np.array(error_rate_list).T
     print("Total time used:", time.time() - start_time, "sec")
     return error_rate_list
@@ -114,16 +111,16 @@ test_image_path = "dataset/MNIST/t10k-images-idx3-ubyte"
 test_label_path = "dataset/MNIST/t10k-labels-idx1-ubyte"
 train_image_path = "dataset/MNIST/train-images-idx3-ubyte"
 train_label_path = "dataset/MNIST/train-labels-idx1-ubyte"
-batch_size = 128
+batch_size = 16
 epoches = 20
 learning_rate_list = np.array([5e-2] * 2 + [2e-2] * 3 + [1e-2] * 3 + [5e-3] * 4 + [1e-3] * 4 + [5e-4] * 4)
-# model_path = "model_data_20.pkl"
+# model_path = "customCNN_data_20.pkl"
 
 train_data, test_data = load_dataset(test_image_path, test_label_path, train_image_path, train_label_path)
 model = CustomCNN()
 error_rate_list = train(model, train_data, test_data, epoches, learning_rate_list, batch_size)
 # test(model_path, test_data)
-test("model_data_" + str(error_rate_list[1].argmin() + 1) + ".pkl", test_data)
+test("customCNN_data_" + str(error_rate_list[1].argmin() + 1) + ".pkl", test_data)
 x = np.arange(1, epoches + 1)
 plt.xlabel("epoches")
 plt.ylabel("error rate")

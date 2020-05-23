@@ -8,9 +8,9 @@ def zero_pad(X, pad):
 # initialisation of the weights & bias
 def initialise(kernel_shape):
     bias_shape = (1, 1, 1, kernel_shape[-1]) if len(kernel_shape) == 4 else (kernel_shape[-1], )
-    mu, sigma = 0, 0.1
+    mu, sigma = 0, 0.01
     weight = np.random.normal(mu, sigma, kernel_shape)
-    bias = np.ones(bias_shape) * 0.01
+    bias = np.ones(bias_shape) * 0.001
     return weight, bias
 
 # softmax activation function for the output layer
