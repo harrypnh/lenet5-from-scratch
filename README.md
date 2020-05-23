@@ -30,6 +30,9 @@ decision-tree-from-scratch/
 └── error_rate_plot.py
 ```
 ## 2. The Structure of LeNet-5
+
+<img src="/images/lenet5_structure.png"/>
+
 - The LeNet-5 has the following structure:<br/>
 `C1 -> ReLU1 -> S2 -> C3 -> ReLU2 -> S4 -> C5 -> ReLU3 -> F6 -> ReLU4 -> F7 (softmax)`
   - C1 is a convolutional layer having 6 `5x5x1` filters and no zero-padding. Input: `32x32x1`, Output: `28x28x6`.
