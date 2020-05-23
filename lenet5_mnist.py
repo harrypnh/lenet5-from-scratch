@@ -119,7 +119,7 @@ train_label_path = "dataset/MNIST/train-labels-idx1-ubyte"
 batch_size = 8
 epoches = 20
 learning_rate_list = np.array([5e-2] * 2 + [2e-2] * 3 + [1e-2] * 3 + [5e-3] * 4 + [1e-3] * 4 + [5e-4] * 4)
-# model_path = "model_data/lenet5_data_0.86.pkl"
+# model_path = "model_data/lenet5_data_0.78.pkl"
 
 train_data, test_data = load_dataset(test_image_path, test_label_path, train_image_path, train_label_path)
 model = LeNet5()
