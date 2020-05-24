@@ -20,7 +20,7 @@ decision-tree-from-scratch/
 │
 ├── model_data/
 │   ├── lenet5_data_0.78.pkl        # LeNet-5 Model with 0.78% Testing Error Rate
-│   └── customCNN_data_0.XX.pkl     # CustomCNN Model with 0.XX% Testing Error Rate
+│   └── customCNN_data_0.56.pkl     # CustomCNN Model with 0.56% Testing Error Rate
 │
 ├── lenet5_mnist.py                 # Train and Test LeNet-5 on MNIST Dataset
 └── custom_cnn_mnist.py             # Train and Test CustomCNN on MNIST Dataset
@@ -50,14 +50,36 @@ The LeNet-5 has the following structure:<br/>
   - Epoch 9, 10, 11 and 12: `0.005`
   - Epoch 13, 14, 15 and 16: `0.001`
   - Epoch 17, 18, 19 and 20: `0.0005`
-- The batch size is `8` to allow more weigth and bias updates which may quickly reduce the error rate over `20` epoches.<br/>
+- The batch size is `8` to allow more weigth and bias updates which may quickly reduce the error rate over `20` epoches.
 
 After each epoch, the settings of the model will be extracted and stored in a `pkl` file using `pickle`. The best model achieves the error rate of `0.78%` on the testing dataset. The training was conducted using CPU only, and the model is evaluated on training and testing datasets once after finishing each epoch, so the total running time is around 3 hours and a half.
 <img src="/images/figure_lenet5.png" width="480"/>
 
 ## 4. The Structure of CustomCNN
+The CustomCNN is a deeper version of LeNet-5 and has the following structure:<br/>
+`C1 -> ReLU1 -> S2 -> C3 -> ReLU2 -> S4 -> C5 -> ReLU3 -> F6 -> ReLU4 -> F7 (softmax)`
+- C1 is a convolutional layer having 32 `5x5x1` filters and zero-padding of size `2`.
+- S2 is a max-pooling layer of size `2x2` and stride `2`.
+- C3 is a convolutional layer having 64 `5x5x32` filters and no zero-padding.
+- S4 is a max-pooling layer of size `2x2` and stride `2`.
+- C5 is a convolutional layer having 128 `5x5x64` filters and no zero-padding.
+- F6 is a fully-connected layer having `256` neurons, each of which takes `128` feature inputs.
+- F7 is a fully-connected layer having `10` neurons, each of which takes `256` feature inputs. The softmax activation function is applied on the output vector of size `10` from the `10` neurons. This softmax vector corresponds to `10` classes for digit `0` to `9`.
+- The cost function of this model is cross-entropy.
 
 ## 5. CustomCNN on MNIST Handwritten Digit Dataset
+- The original size of an image in the MNIST dataset is `28x28`.
+- The training has `20` epoches, and the learning rate decreases after each epoch.
+- The learning rates are set as follows.
+  - Epoch 1 and 2: `0.05`
+  - Epoch 3, 4 and 5: `0.02`
+  - Epoch 6, 7 and 8: `0.01`
+  - Epoch 9, 10, 11 and 12: `0.005`
+  - Epoch 13, 14, 15 and 16: `0.001`
+  - Epoch 17, 18, 19 and 20: `0.0005`
+- The batch size is `8` to allow more weigth and bias updates which may quickly reduce the error rate over `20` epoches.
+
+After each epoch, the settings of the model will be extracted and stored in a `pkl` file using `pickle`. The best model achieves the error rate of `0.56%` on the testing dataset. The training was conducted using CPU only, and the model is evaluated on training and testing datasets once after finishing each epoch, so the total running time is around 10 hours and a half.
 <img src="/images/figure_custom_cnn.png" width="480"/>
 
 ## 6. References
