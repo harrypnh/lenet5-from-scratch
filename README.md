@@ -80,6 +80,7 @@ The CustomCNN is a deeper version of LeNet-5 and has the following structure:<br
 - The batch size is `8` to allow more weigth and bias updates which may quickly reduce the error rate over `20` epoches.
 
 After each epoch, the settings of the model will be extracted and stored in a `pkl` file using `pickle`. The best model achieves the error rate of `0.56%` on the testing dataset. The training was conducted using CPU only, and the model is evaluated on training and testing datasets once after finishing each epoch, so the total running time is around 10 hours and a half.
+
 <img src="/images/figure_custom_cnn.png" width="480"/>
 
 ## 6. References
